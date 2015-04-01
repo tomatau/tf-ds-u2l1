@@ -53,7 +53,7 @@ with con:
                     INNER JOIN weather on name = city
                     WHERE warm_month = '{0}'
                     GROUP BY state
-                    ORDER BY warm_month DESC""".format(month))
+                    ORDER BY average_high DESC""".format(month))
                     # HAVING mean_high > 62
     rows = [ ', '.join(list(i)) for i in cur.fetchall() ]
     print 'The cities that are warmest in {0} are: '.format(month) + ', '.join(rows)
