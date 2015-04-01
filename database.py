@@ -2,6 +2,8 @@
 import sqlite3 as lite
 import pandas as pd
 
+month = raw_input("Enter a month: ")
+
 con = lite.connect('getting_started.db')
 
 cities = (
@@ -49,12 +51,12 @@ with con:
 
     cur.execute("""SELECT name, state FROM cities
                     INNER JOIN weather on name = city
-                    WHERE warm_month = 'July'
+                    WHERE warm_month = '{0}'
                     GROUP BY state
-                    ORDER BY warm_month DESC""")
+                    ORDER BY warm_month DESC""".format(month))
                     # HAVING mean_high > 62
     rows = [ ', '.join(list(i)) for i in cur.fetchall() ]
-    print 'The cities that are warmest in July are: ' + ', '.join(rows)
+    print 'The cities that are warmest in {0} are: '.format(month) + ', '.join(rows)
     # for row in rows:
         # print ', '.join(row)
     # cols = [ desc[0] for desc in cur.description ]
